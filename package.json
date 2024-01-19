@@ -12,29 +12,26 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.495.0",
     "aws-amplify": "^6.0.12",
-    "aws-sdk": "^2.1539.0",
-    "next": "14.0.4",
+    "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@aws-amplify/backend": "^0.10.1",
-    "@aws-amplify/backend-cli": "^0.9.6",
+    "@aws-amplify/backend": "^0.10.2",
+    "@aws-amplify/backend-cli": "^0.9.7",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "aws-cdk": "^2.122.0",
-    "aws-cdk-lib": "^2.122.0",
+    "autoprefixer": "^10.4.17",
     "constructs": "^10.3.0",
     "eslint": "^8",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "14.1.0",
     "eslint-plugin-tailwindcss": "^3.14.0",
     "postcss": "^8",
-    "tailwindcss": "^3.3.0",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   }
 }
