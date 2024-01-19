@@ -1,8 +1,18 @@
+// amplify/backend.ts
+import * as s3 from 'aws-cdk-lib/aws-s3';
 import { defineBackend } from '@aws-amplify/backend';
-import { auth } from './auth/resource';
-import { data } from './data/resource';
+import { auth } from './auth/resource.js';
+import { data } from './data/resource.js';
 
-defineBackend({
+const backend = defineBackend({
   auth,
-  data,
+  data
 });
+
+const bucketStack = backend.createStack('BucketStack');
+const bucket = new s3.Bucket(bucketStack, 'movie-covers', {
+  blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+});
+
+const authRole = backend.auth.resources.authenticatedUserIamRole;
+bucket.grantReadWrite(authRole);

@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
+import Image from "next/image";
 
-const inter = Inter({ subsets: ['latin'] })
+const montserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,8 +16,28 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html className="" lang="en">
+    <body className={`${montserrat.className}`}>
+    <main className="p-[7.5rem]">
+      {children}
+    </main>
+    <Image
+      className="absolute bottom-0 z-50 h-auto w-full"
+      src="/Vector.png"
+      alt=""
+      width={1440}
+      height={111}
+      priority
+    />
+    <Image
+      className="absolute bottom-0 z-50 h-auto w-full"
+      src="/Vector2.png"
+      alt=""
+      width={1440}
+      height={111}
+      priority
+    />
+    </body>
     </html>
   )
 }
