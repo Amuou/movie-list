@@ -20,6 +20,9 @@ const config: Config = {
         card: '#092C39',
         background: '#093545',
       },
+      spacing: {
+        '30': '7.5rem',
+      },
       fontFamily: {
         sans: ['Montserrat', 'sans-serif'],
       },

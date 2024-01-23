@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 interface FormInputProps {
   placeholder: string
   id?: string
@@ -18,7 +20,19 @@ export default function FormInput({
       id={id}
       name={name}
       type={type}
-      className={`h-[2.8125rem] rounded-[10px] bg-input p-4 placeholder:text-base-s placeholder:text-white ${className}`}
+      className={clsx(
+        'h-[2.8125rem]',
+        'rounded-[10px]',
+        'border-0',
+        'focus:ring-input',
+        'focus:ring-1',
+        'bg-input',
+        'p-[0.65rem]',
+        'placeholder:text-base-s',
+        'placeholder:text-white',
+        'focus:placeholder:text-transparent',
+        className,
+      )}
       placeholder={placeholder}
     />
   )

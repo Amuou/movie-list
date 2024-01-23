@@ -16,25 +16,31 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html className="" lang="en">
-      <body className={`${montserrat.className}`}>
-        <main className="p-[7.5rem]">{children}</main>
-        <Image
-          className="absolute bottom-0 z-50 h-auto w-full"
-          src="/Vector.png"
-          alt=""
-          width={1440}
-          height={111}
-          priority
-        />
-        <Image
-          className="absolute bottom-0 z-50 h-auto w-full"
-          src="/Vector2.png"
-          alt=""
-          width={1440}
-          height={111}
-          priority
-        />
+    <html lang="en">
+      <body
+        className={`flex min-h-screen flex-col pt-30 md:overscroll-y-none ${montserrat.className} antialiased`}
+      >
+        <main className="flex flex-1 flex-col items-center justify-center px-30">
+          {children}
+        </main>
+        <footer className="relative inset-y-0 z-50 h-40 w-full">
+          <Image
+            className="absolute bottom-0 w-full"
+            src="/Vector.png"
+            alt=""
+            width={1440}
+            height={111}
+            priority
+          />
+          <Image
+            className="absolute bottom-0 w-full"
+            src="/Vector2.png"
+            alt=""
+            width={1440}
+            height={111}
+            priority
+          />
+        </footer>
       </body>
     </html>
   )

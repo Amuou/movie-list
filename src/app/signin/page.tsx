@@ -4,7 +4,7 @@ import { userSignIn } from '@/app/lib/actions'
 
 export default function SignIn() {
   return (
-    <section className="flex min-h-screen flex-col items-center justify-center space-y-6">
+    <>
       <h1>Sign In</h1>
       <form
         action={userSignIn}
@@ -30,6 +30,6 @@ export default function SignIn() {
         </div>
         <Button text="Login" />
       </form>
-    </section>
+    </>
   )
 }

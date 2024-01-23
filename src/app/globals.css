@@ -35,9 +35,13 @@
     @apply bg-primary;
   }
 
-  .btn {
-    @apply rounded-[10px] px-7 py-4;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
-  /* ... */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
 }

@@ -17,7 +17,7 @@ export default function CreateMoviePage() {
   })
 
   return (
-    <form action={dispatch} className="flex flex-col">
+    <form action={dispatch} className="flex w-full max-w-4xl flex-col">
       <h2>Create a new movie</h2>
       <div className="mt-[7.5rem] flex flex-row items-center justify-center space-x-32">
         <ImageUpload poster={poster} setPoster={setPoster} />
@@ -33,15 +33,15 @@ export default function CreateMoviePage() {
             id="year"
             name="year"
             type="number"
-            className="mt-4 w-2/3"
+            className="mt-4 w-7/12"
             placeholder="Publishing year"
           />
           <div className="mt-16 flex space-x-4">
-            <Link
-              href="/"
-              className="btn flex w-1/2 items-center justify-center border-[1px] border-solid border-white bg-transparent"
-            >
-              Cancel
+            <Link className="w-1/2" passHref href="/">
+              <Button
+                text="Cancel"
+                className="w-full border-[1px] border-solid border-white bg-transparent"
+              ></Button>
             </Link>
             <Button className="w-1/2" text="Submit" />
           </div>

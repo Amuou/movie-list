@@ -5,7 +5,10 @@ interface ButtonProps {
 
 export default function Button({ text, className = '' }: ButtonProps) {
   return (
-    <button type="submit" className={`btn bg-primary ${className}`}>
+    <button
+      type="submit"
+      className={`rounded-[10px] bg-primary px-7 py-4 ${className}`}
+    >
       {text}
     </button>
   )

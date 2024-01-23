@@ -40,9 +40,9 @@
     "lint-staged": "^15.2.0",
     "postcss": "^8",
     "prettier": "^3.2.4",
-    "supabase": "^1.131.5",
+    "supabase": "^1.136.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "husky": "^8.0.0"
+    "husky": "^8.0.3"
   }
 }

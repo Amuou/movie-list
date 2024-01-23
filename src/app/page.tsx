@@ -8,13 +8,15 @@ export default async function MainPage() {
   const movieList = await fetchMovies()
   return (
     <>
-      {movieList?.length !== 0 ? (
-        <section className="flex max-h-screen min-h-screen flex-col items-center justify-center space-y-10">
+      {movieList?.length === 0 ? (
+        <section className="flex flex-col items-center space-y-10">
           <h2>Your movie list is empty</h2>
-          <Button text="Add a new movie" />
+          <Link passHref href="create">
+            <Button text="Add a new movie" />
+          </Link>
         </section>
       ) : (
-        <section className="mx-auto flex w-9/12 max-w-screen-xl flex-col items-center">
+        <section className="flex w-full flex-col items-center">
           <div className="w-full">
             <div className="flex items-center justify-between">
               <div className="flex items-center justify-center space-x-3">
@@ -44,7 +46,7 @@ export default async function MainPage() {
               </div>
             </div>
           </div>
-          <div className="my-32 grid w-full grid-cols-4 gap-6">
+          <div className="my-30 grid w-full grid-cols-4 gap-6">
             {movieList?.map(
               (el) =>
                 el.title &&
