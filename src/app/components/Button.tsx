@@ -1,10 +1,12 @@
 interface ButtonProps {
-  text: string;
-  className?: string;
+  text: string
+  className?: string
 }
 
-export default function Button({ text, className = "" }: ButtonProps) {
+export default function Button({ text, className = '' }: ButtonProps) {
   return (
-    <button className={`btn ${className}`}>{text}</button>
+    <button type="submit" className={`btn bg-primary ${className}`}>
+      {text}
+    </button>
   )
 }

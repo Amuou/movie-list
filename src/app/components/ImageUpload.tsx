@@ -1,33 +1,36 @@
-"use client"
+import Image from 'next/image'
+import { Dispatch, SetStateAction } from 'react'
+import clsx from 'clsx'
 
-import Image from "next/image";
-import { useDropzone } from 'react-dropzone';
-import { useCallback, useState } from "react";
-import { uploadMovie } from '@/app/lib/actions';
+interface ImageUploadProps {
+  poster: File | null
+  setPoster: Dispatch<SetStateAction<File | null>>
+}
 
-export default function ImageUpload() {
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    const lastUploadedFile = acceptedFiles[acceptedFiles.length - 1];
-    if (!lastUploadedFile) return;
-    const formData = new FormData();
-    formData.append('file', lastUploadedFile)
-    await uploadMovie(formData)
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      'image/*': ['.jpeg', '.png']
-    }
-  })
-
+export default function ImageUpload({ poster, setPoster }: ImageUploadProps) {
   return (
-    <div
-      {...getRootProps()}
-      className="cursor-pointer	flex h-[500px] w-1/2 flex-col items-center justify-center rounded-[10px] border-2 border-dashed border-white bg-input text-white">
-      <input {...getInputProps()}
+    <div>
+      <input
+        className={clsx(
+          !poster && 'cursor-pointer',
+          'file:flex',
+          'file:h-[500px]',
+          'file:w-full',
+          'file:flex-col',
+          'file:items-center',
+          'file:justify-center',
+          'file:rounded-[10px]',
+          'file:border-2',
+          'file:border-dashed',
+          'file:border-white',
+          'file:bg-input',
+          'file:text-white',
+          'file:align-middle',
+        )}
+        type="file"
+        id="poster"
+        name="poster"
       />
-      <Image src="/UploadIcon.svg" alt="Upload icon" height={24} width={24} />
-      <span>Drop an image here</span>
     </div>
   )
 }
