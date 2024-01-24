@@ -13,7 +13,7 @@ export default function Button({
     <button
       disabled={disabled}
       type="submit"
-      className={`${className} rounded-[10px] bg-primary px-7 py-4 font-bold hover:bg-primary/55`}
+      className={`${className} rounded-[10px] bg-primary px-7 py-4 font-bold`}
     >
       {text}
     </button>

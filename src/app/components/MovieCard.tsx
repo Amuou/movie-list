@@ -16,6 +16,7 @@ export default function MovieCard({ id, poster, title, year }: MovieCardProps) {
       <Link href={`/create?type=edit&movieId=${id}`}>
         <Image
           className="h-auto w-full"
+          aria-label="Edit movie card"
           src={`https://${process.env.SUPABASE_HOSTNAME}/storage/v1/object/public/movie-posters/public/${poster}.png`}
           alt=""
           width={266}

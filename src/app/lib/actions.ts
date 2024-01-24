@@ -46,7 +46,7 @@ const CreateMovieFormSchema = z.object({
       required_error: 'Please enter a movie year',
     })
     .min(1888, { message: 'There were no movies before 1888 year :)' })
-    .max(2900, { message: 'Please provide year less than 3000' }),
+    .max(3000, { message: 'Please provide year less than 3000' }),
   poster: z.any().optional(),
 })
 
