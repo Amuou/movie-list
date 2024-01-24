@@ -25,7 +25,7 @@ export default async function MainPage() {
                 <h2>My movies</h2>
                 <Link className="mt-2" href="/create">
                   <Image
-                    src="/CreateMovieIcon.svg"
+                    src="/images/CreateMovieIcon.svg"
                     alt="Create movie icon"
                     width={32}
                     height={32}

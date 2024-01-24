@@ -26,7 +26,7 @@ export default function RootLayout({
         <footer className="relative inset-y-0 z-50 h-40 w-full">
           <Image
             className="absolute bottom-0 w-full"
-            src="/Vector.png"
+            src="/images/Vector.png"
             alt=""
             width={1440}
             height={111}
@@ -34,7 +34,7 @@ export default function RootLayout({
           />
           <Image
             className="absolute bottom-0 w-full"
-            src="/Vector2.png"
+            src="/images/Vector2.png"
             alt=""
             width={1440}
             height={111}

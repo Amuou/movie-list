@@ -17,7 +17,12 @@ export default function LogoutButton() {
     <form action={signOut}>
       <button className="flex items-center justify-center space-x-3 bg-transparent">
         <span>Logout</span>
-        <Image src="/LogoutIcon.svg" alt="Logout icon" width={32} height={32} />
+        <Image
+          src="/images/LogoutIcon.svg"
+          alt="Logout icon"
+          width={32}
+          height={32}
+        />
       </button>
     </form>
   )
