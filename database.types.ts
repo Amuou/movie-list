@@ -11,28 +11,28 @@ export interface Database {
     Tables: {
       Movie: {
         Row: {
-          created_at: string | null
-          id: number
+          created_at: string
+          id: string
           poster_id: string | null
-          title: string
+          title: string | null
           user_id: string | null
-          year: number | null
+          year: string | null
         }
         Insert: {
-          created_at?: string | null
-          id?: number
+          created_at?: string
+          id?: string
           poster_id?: string | null
-          title: string
+          title?: string | null
           user_id?: string | null
-          year?: number | null
+          year?: string | null
         }
         Update: {
-          created_at?: string | null
-          id?: number
+          created_at?: string
+          id?: string
           poster_id?: string | null
-          title?: string
+          title?: string | null
           user_id?: string | null
-          year?: number | null
+          year?: string | null
         }
         Relationships: []
       }

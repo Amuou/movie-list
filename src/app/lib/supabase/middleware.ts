@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { type NextRequest, NextResponse } from 'next/server'
+import { Database } from '@/../database.types'
 
 export const createClient = (request: NextRequest) => {
   let response = NextResponse.next({
@@ -8,7 +9,7 @@ export const createClient = (request: NextRequest) => {
     },
   })
 
-  const supabase = createServerClient(
+  const supabase = createServerClient<Database>(
     `https://${process.env.SUPABASE_HOSTNAME!}`,
     process.env.SUPABASE_ANON_KEY!,
     {

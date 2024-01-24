@@ -3,7 +3,34 @@ import Image from 'next/image'
 import MovieCard from '@/app/components/MovieCard'
 import Link from 'next/link'
 import { fetchMovies } from '@/app/lib/data'
-import LogoutButton from '@/app/components/LogoutButton'
+import { cookies } from 'next/headers'
+import { createClient } from '@/app/lib/supabase/server'
+import { redirect } from 'next/navigation'
+
+function LogoutButton() {
+  const signOut = async () => {
+    'use server'
+
+    const cookieStore = cookies()
+    const supabase = createClient(cookieStore)
+    await supabase.auth.signOut()
+    return redirect('/signin')
+  }
+
+  return (
+    <form action={signOut}>
+      <button className="flex items-center justify-center space-x-3 bg-transparent">
+        <span className="hidden font-bold sm:inline">Logout</span>
+        <Image
+          src="/images/LogoutIcon.svg"
+          alt="Logout icon"
+          width={32}
+          height={32}
+        />
+      </button>
+    </form>
+  )
+}
 
 export default async function MainPage() {
   const { movieList, movieListTotal } = await fetchMovies(1, 8)
@@ -37,13 +64,14 @@ export default async function MainPage() {
               </div>
             </div>
           </div>
-          <div className="my-30 grid w-full grid-cols-4 gap-6">
+          <div className="my-20 grid w-full grid-cols-2 gap-5 sm:gap-6 md:grid-cols-3 lg:my-30 lg:grid-cols-4">
             {movieList?.map(
               (el) =>
                 el.title &&
                 el.year &&
                 el.poster_id && (
                   <MovieCard
+                    id={el.id}
                     key={el.id}
                     title={el.title}
                     year={el.year}
@@ -52,24 +80,25 @@ export default async function MainPage() {
                 ),
             )}
           </div>
-          <div className="flex items-center space-x-2">
-            <Link href="/a">Prev</Link>
-            <Link
-              className="flex size-8 items-center justify-center rounded bg-primary"
-              href="/a"
-            >
-              1
-            </Link>
-            <Link
-              className="flex size-8 items-center justify-center rounded bg-primary"
-              href="/a"
-            >
-              2
-            </Link>
-            <Link href="/a">Next</Link>
+          <div className="flex items-center space-x-2 font-bold">
+            <Link href="/">Prev</Link>
+            <PaginationNumber number={1} />
+            <PaginationNumber number={2} />
+            <Link href="/">Next</Link>
           </div>
         </section>
       )}
     </>
+  )
+}
+
+function PaginationNumber({ number }: { number: number }) {
+  return (
+    <Link
+      className="flex size-8 items-center justify-center rounded bg-primary hover:bg-primary/55"
+      href="/"
+    >
+      {number}
+    </Link>
   )
 }
