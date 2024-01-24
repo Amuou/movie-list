@@ -50,6 +50,11 @@ const CreateMovieFormSchema = z.object({
   poster: z.any().optional(),
 })
 
+const redirectToMainPage = () => {
+  revalidatePath('/')
+  redirect('/')
+}
+
 export async function upsertMovie(
   movieId: string | null,
   prevState: CreateMovieState,
@@ -68,22 +73,39 @@ export async function upsertMovie(
   }
   const validationResult = validatedFields.data
   const supabaseClient = createClient(cookieStore)
+
+  const updatePosterImageSet = (id: string) =>
+    supabaseClient
+      .from('Movie')
+      .update({ poster_image_saved: true })
+      .eq('id', id)
+
+  const posterFile = validationResult.poster as File
+  const uploadPoster = (posterId: string) =>
+    supabaseClient.storage
+      .from('movie-posters')
+      .upload(`public/${posterId}.png`, posterFile)
+
   // Create
   if (!movieId) {
-    const { error, data } = await createClient(cookieStore)
+    const { error, data } = await supabaseClient
       .from('Movie')
       .insert({
         title: validationResult.title,
         year: new Date(+validationResult.year, 1, 1).toISOString(),
       })
       .select()
-    const posterId = data?.[0].poster_id
+      .maybeSingle()
+    const posterId = data?.poster_id
+    console.warn(1)
+    if (!posterId || posterFile.size === 0) {
+      redirectToMainPage()
+      return
+    }
+    console.warn(12)
 
-    if (!posterId) return
-
-    await supabaseClient.storage
-      .from('movie-posters')
-      .upload(`public/${posterId}.png`, validationResult.poster)
+    await uploadPoster(posterId)
+    await updatePosterImageSet(data?.id)
   } else {
     // Edit
     const newPosterId = randomUUID()
@@ -106,13 +128,17 @@ export async function upsertMovie(
     await supabaseClient.storage
       .from('movie-posters')
       .remove([`public/${data.poster_id}.png`])
-    await supabaseClient.storage
-      .from('movie-posters')
-      .upload(`public/${newPosterId}.png`, validationResult.poster)
+
+    if (posterFile.size === 0) {
+      redirectToMainPage()
+      return
+    }
+
+    await uploadPoster(newPosterId)
+    await updatePosterImageSet(movieId)
   }
 
-  revalidatePath('/')
-  redirect('/')
+  redirectToMainPage()
 }
 
 export async function userSignIn(prevState: SignInState, formData: FormData) {
@@ -137,8 +163,7 @@ export async function userSignIn(prevState: SignInState, formData: FormData) {
   })
 
   if (data.user) {
-    revalidatePath('/')
-    redirect('/')
+    redirectToMainPage()
   }
 
   if (error) {

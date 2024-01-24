@@ -64,7 +64,7 @@ export default async function MainPage() {
               </div>
             </div>
           </div>
-          <div className="my-20 grid w-full grid-cols-2 gap-5 sm:gap-6 md:grid-cols-3 lg:my-30 lg:grid-cols-4">
+          <div className="my-20  grid min-h-[27rem] w-full grid-cols-2 gap-5 sm:gap-6 md:grid-cols-3 lg:my-30 lg:grid-cols-4">
             {movieList?.map(
               (el) =>
                 el.title &&
@@ -76,6 +76,7 @@ export default async function MainPage() {
                     title={el.title}
                     year={el.year}
                     poster={el.poster_id}
+                    posterImageSaved={el.poster_image_saved}
                   />
                 ),
             )}

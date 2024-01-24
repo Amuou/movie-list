@@ -14,6 +14,7 @@ export interface Database {
           created_at: string
           id: string
           poster_id: string | null
+          poster_image_saved: boolean
           title: string | null
           user_id: string | null
           year: string | null
@@ -22,6 +23,7 @@ export interface Database {
           created_at?: string
           id?: string
           poster_id?: string | null
+          poster_image_saved?: boolean
           title?: string | null
           user_id?: string | null
           year?: string | null
@@ -30,6 +32,7 @@ export interface Database {
           created_at?: string
           id?: string
           poster_id?: string | null
+          poster_image_saved?: boolean
           title?: string | null
           user_id?: string | null
           year?: string | null
