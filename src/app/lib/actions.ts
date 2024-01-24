@@ -1,9 +1,9 @@
 'use server'
 
-import { v4 as uuidv4 } from 'uuid'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { supabase } from '@/app/lib/supabase'
+import { cookies } from 'next/headers'
+import { createClient } from '@/app/lib/supabase/server'
 
 export type State = {
   errors?: {
@@ -15,6 +15,7 @@ export type State = {
 }
 
 export async function createMovie(prevState: State, formData: FormData) {
+  const cookieStore = cookies()
   const rawFormData = {
     title: formData.get('title') as string,
     year: formData.get('year') as string,
@@ -24,19 +25,17 @@ export async function createMovie(prevState: State, formData: FormData) {
   if (!rawFormData.title || !rawFormData.year || !rawFormData.poster) {
     return
   }
-
-  const { error, data } = await supabase
+  const { error, data } = await createClient(cookieStore)
     .from('Movie')
     .insert({
       title: rawFormData.title,
       year: +rawFormData.year,
     })
     .select()
-
-  const posterId = data?.[0].posterId
+  const posterId = data?.[0].poster_id
   if (!posterId) return
-  const result = await supabase.storage
-    .from('movie-posters')
+  const result = await createClient(cookieStore)
+    .storage.from('movie-posters')
     .upload(`public/${posterId}.png`, rawFormData.poster)
 
   revalidatePath('/')
@@ -44,15 +43,23 @@ export async function createMovie(prevState: State, formData: FormData) {
 }
 
 export async function userSignIn(formData: FormData) {
+  const cookieStore = cookies()
   const rawFormData = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   }
-  console.warn(123, rawFormData)
 
-  // const { isSignedIn, nextStep } = await signIn({ username: rawFormData.email, password: rawFormData.password })
-  // if (isSignedIn) {
-  //   revalidatePath("/");
-  //   redirect("/");
-  // }
+  // Validation
+
+  const { data, error } = await createClient(
+    cookieStore,
+  ).auth.signInWithPassword({
+    email: rawFormData.email,
+    password: rawFormData.password,
+  })
+
+  if (data.user) {
+    revalidatePath('/')
+    redirect('/')
+  }
 }

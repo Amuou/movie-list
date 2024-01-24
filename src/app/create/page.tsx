@@ -19,7 +19,7 @@ export default function CreateMoviePage() {
   return (
     <form action={dispatch} className="flex w-full max-w-4xl flex-col">
       <h2>Create a new movie</h2>
-      <div className="mt-[7.5rem] flex flex-row items-center justify-center space-x-32">
+      <div className="mt-30 flex flex-row items-center justify-center space-x-32">
         <ImageUpload poster={poster} setPoster={setPoster} />
         <div className="h-[500px] w-1/2">
           <FormInput
